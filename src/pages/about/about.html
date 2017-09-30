@@ -7,5 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-  {{ score }}
+  <ion-list>
+    <ion-item-sliding *ngFor="let score of scores">
+      <ion-item>
+        <h2>  {{ score }}</h2>
+      </ion-item>
+      <ion-item-options side="right">
+            <button ion-button color="secondary" (click)="facebookShare()">
+              <ion-icon name="call"></ion-icon>
+              Share
+            </button>
+          </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
