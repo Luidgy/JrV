@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "672073039153",
+    "firebase_url": "https://pacman-3750a.firebaseio.com",
+    "project_id": "pacman-3750a",
+    "storage_bucket": "pacman-3750a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672073039153:android:d3a72dc7a3c13381",
+        "android_client_info": {
+          "package_name": "com.tokimogo.pacman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "672073039153-fr64dkavnfll7ktqil70pk9ak6l6l8j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6TRyMxMhBtFtYOxvspqTztYmElLLi8r8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
