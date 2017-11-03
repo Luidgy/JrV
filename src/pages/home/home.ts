@@ -38,7 +38,7 @@ export class HomePage {
       };
       this.smileys.push(smiley);
       this.storage.set('smileys', this.smileys);
-      this.toast.show('Feeling saved', '1000', 'center').subscribe();
+      this.toast.show('Feeling saved.', '1000', 'center').subscribe();
       console.log(this.smileys);
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -68,7 +68,7 @@ export class HomePage {
       default:
         feel = 'weird'
     }
-    this.socialSharing.shareViaFacebook("I'm feeling " + feel, null, null).then(() => {
+    this.socialSharing.share("I'm feeling " + feel + ".", null, null, null).then(() => {
       console.log('Sharing via Twitter success');
     }).catch(() => {
       console.log('Sharing via Twitter error');
