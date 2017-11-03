@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Toast } from '@ionic-native/toast';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     SplashScreen,
     SocialSharing,
     Geolocation,
+    Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

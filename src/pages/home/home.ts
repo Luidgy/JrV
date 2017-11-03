@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Toast } from '@ionic-native/toast';
 
 @Component({
   selector: 'page-home',
@@ -12,7 +13,7 @@ export class HomePage {
   smileys: {feeling: string, latitude: number, longitude: number}[];
   feeling: string;
 
-  constructor(public navCtrl: NavController, private storage: Storage, private geolocation: Geolocation, private socialSharing: SocialSharing) {
+  constructor(public navCtrl: NavController, private storage: Storage, private geolocation: Geolocation, private socialSharing: SocialSharing, private toast: Toast) {
     this.storage.get('smileys').then((val) => {
       if (val === null) {
         this.smileys = [];
@@ -20,10 +21,12 @@ export class HomePage {
         this.smileys = val;
       }
     });
+    this.toast.show('Click a feeling then save it or share it :)', '5000', 'bottom').subscribe();
   }
 
   smileyClick(icon:string) {
     this.feeling = icon;
+    this.toast.show('Got it!', '1000', 'center').subscribe();
   }
 
   saveFeeling() {
@@ -35,6 +38,7 @@ export class HomePage {
       };
       this.smileys.push(smiley);
       this.storage.set('smileys', this.smileys);
+      this.toast.show('Feeling saved', '1000', 'center').subscribe();
       console.log(this.smileys);
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -64,10 +68,10 @@ export class HomePage {
       default:
         feel = 'weird'
     }
-    this.socialSharing.shareViaTwitter("I'm feeling " + feel, null, null).then(() => {
-      console.log('Sharing via Facebook success');
+    this.socialSharing.shareViaFacebook("I'm feeling " + feel, null, null).then(() => {
+      console.log('Sharing via Twitter success');
     }).catch(() => {
-      console.log('Sharing via Facebook error');
+      console.log('Sharing via Twitter error');
     });
   }
 }

@@ -13,13 +13,11 @@
       <img src="assets/images/happy1.svg"(click)="smileyClick('happy1')">
       <img src="assets/images/happy2.svg" (click)="smileyClick('happy2')">
     </div>
-    <div>
-      <button ion-button color="secondary" (click)="saveFeeling()">
-        <ion-icon name="call"></ion-icon>
+    <div id="smiley-btn">
+      <button ion-button color="default" (click)="saveFeeling()">
         Save
       </button>
       <button ion-button color="secondary" (click)="shareFeeling()">
-        <ion-icon name="call"></ion-icon>
         Share
       </button>
     </div>
