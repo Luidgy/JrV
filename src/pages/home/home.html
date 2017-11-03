@@ -5,9 +5,13 @@
 </ion-header>
 
 <ion-content padding>
-  <img src="assets/images/sad2.svg">
-  <img src="assets/images/sad1.svg">
-  <img src="assets/images/meh.svg">
-  <img src="assets/images/happy1.svg">
-  <img src="assets/images/happy2.svg">
+  <div id="wrapper">
+    <div id="smiley">
+      <img src="assets/images/sad2.svg" (click)="smileyClick('sad2')">
+      <img src="assets/images/sad1.svg" (click)="smileyClick('sad1')">
+      <img src="assets/images/meh.svg" (click)="smileyClick('meh')">
+      <img src="assets/images/happy1.svg"(click)="smileyClick('happy1')">
+      <img src="assets/images/happy2.svg" (click)="smileyClick('happy2')">
+    </div>
+  </div>
 </ion-content>
