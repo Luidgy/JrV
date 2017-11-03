@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>How are you feeling?</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -12,6 +12,16 @@
       <img src="assets/images/meh.svg" (click)="smileyClick('meh')">
       <img src="assets/images/happy1.svg"(click)="smileyClick('happy1')">
       <img src="assets/images/happy2.svg" (click)="smileyClick('happy2')">
+    </div>
+    <div>
+      <button ion-button color="secondary" (click)="saveFeeling()">
+        <ion-icon name="call"></ion-icon>
+        Save
+      </button>
+      <button ion-button color="secondary" (click)="shareFeeling()">
+        <ion-icon name="call"></ion-icon>
+        Share
+      </button>
     </div>
   </div>
 </ion-content>
