@@ -43,7 +43,11 @@ export class HomePage {
       this.toast.show('Feeling saved.', '1000', 'center').subscribe();
       console.log(this.smileys);
     }).catch((error) => {
-
+      let smiley = {
+        feeling: this.feeling,
+        latitude: 73.89,
+        longitude: -90.53
+      };
       this.smileys.push(smiley);
       this.storage.set('smileys', this.smileys);
       this.toast.show('Feeling saved.', '1000', 'center').subscribe();
