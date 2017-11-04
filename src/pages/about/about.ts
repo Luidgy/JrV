@@ -17,7 +17,6 @@ export class AboutPage {
   end = 'chicago, il';
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
-  scores: string[];
   latitude: number;
   longitude: number;
   smileys: {feeling: string, latitude: number, longitude: number}[];
@@ -29,11 +28,6 @@ export class AboutPage {
       this.longitude = resp.coords.longitude;
     }).catch((error) => {
       console.log('Error getting location', error);
-    });
-    storage.set('scores', [121, 123213, 4344]);
-
-    storage.get('scores').then((val) => {
-      this.scores = val;
     });
   }
 
@@ -49,26 +43,23 @@ export class AboutPage {
   }
 
   initMap() {
-
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 7,
       center: {lat: 41.85, lng: -87.65}
     });
 
-
-this.storage.get('smileys').then((val) => {
-  this.smileys = val;
-});
-
-for (var i = 0; i < 10;i++){
-  var marker = new google.maps.Marker({
-  position:  {lat: this.smileys[i], lng: this.smileys[i]},
-  map: this.map,
-  title: this.smileys[i]
-});// fin du markeur
-}//fin du for1
-
-    this.directionsDisplay.setMap(this.map);
+    this.storage.get('smileys').then((val) => {
+      this.smileys = val;
+      for (let smiley of this.smileys) {
+        console.log(smiley);
+        var marker = new google.maps.Marker({
+          position:  {lat: smiley.latitude, lng: smiley.longitude},
+          map: this.map,
+          title: smiley.feeling
+        });
+      }
+      this.directionsDisplay.setMap(this.map);
+    });
   }
 
   calculateAndDisplayRoute() {
