@@ -42,8 +42,8 @@ export class HomePage {
     this.geolocation.getCurrentPosition(options).then((resp) => {
       let smiley = {
         feeling: this.feeling,
-        latitude: resp.coords.latitude + 1,
-        longitude: resp.coords.longitude + 1
+        latitude: resp.coords.latitude,
+        longitude: resp.coords.longitude
       };
       this.smileys.push(smiley);
       this.storage.set('smileys', this.smileys);
