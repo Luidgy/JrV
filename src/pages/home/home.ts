@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Toast } from '@ionic-native/toast';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
