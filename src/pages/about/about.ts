@@ -58,9 +58,9 @@ export class AboutPage {
       for (let smiley of val) {
         console.log(smiley);
         let marker = new google.maps.Marker({
-          position:  {lat: smiley.latitude, lng: smiley.longitude},
+          position: {lat: smiley.latitude, lng: smiley.longitude},
+          icon: "assets/images/" + smiley.feeling + ".png",
           map: this.map,
-          title: smiley.feeling
         });
       }
       this.directionsDisplay.setMap(this.map);
