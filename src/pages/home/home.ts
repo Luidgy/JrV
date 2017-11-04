@@ -46,6 +46,7 @@ export class HomePage {
     });
   }
 
+
   shareFeeling() {
     var feel;
 

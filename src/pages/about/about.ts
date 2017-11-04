@@ -20,6 +20,7 @@ export class AboutPage {
   scores: string[];
   latitude: number;
   longitude: number;
+  smileys: {feeling: string, latitude: number, longitude: number}[];
 
   constructor(public navCtrl: NavController, private storage: Storage, private socialSharing: SocialSharing, private geolocation: Geolocation) {
 
@@ -53,11 +54,20 @@ export class AboutPage {
       zoom: 7,
       center: {lat: 41.85, lng: -87.65}
     });
-    var marker = new google.maps.Marker({
-    position:  {lat: -25.363, lng: 131.044},
-    map: this.map,
-    title: 'Hello World!'
-  });
+
+
+this.storage.get('smileys').then((val) => {
+  this.smileys = val;
+});
+
+for (var i = 0; i < 10;i++){
+  var marker = new google.maps.Marker({
+  position:  {lat: this.smileys[i], lng: this.smileys[i]},
+  map: this.map,
+  title: this.smileys[i]
+});// fin du markeur
+}//fin du for1
+
     this.directionsDisplay.setMap(this.map);
   }
 
