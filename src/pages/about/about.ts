@@ -13,8 +13,8 @@ declare var google;
 export class AboutPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  start = 'chicago, il';
-  end = 'chicago, il';
+  start = 'paris';
+  end = 'paris';
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   latitude: number;
@@ -45,12 +45,7 @@ export class AboutPage {
   initMap() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 7,
-      center: {lat: 41.85, lng: -87.65}
-    });
-    let marker = new google.maps.Marker({
-      position:  {lat: 76.3, lng: -77},
-      map: this.map,
-      title: "hello"
+      center: {lat: 48.85, lng: 2.35}
     });
     this.storage.get('smileys').then((val) => {
       this.smileys = val;
