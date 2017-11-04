@@ -47,12 +47,17 @@ export class AboutPage {
       zoom: 7,
       center: {lat: 41.85, lng: -87.65}
     });
-
+    let marker = new google.maps.Marker({
+      position:  {lat: 76.3, lng: -77},
+      map: this.map,
+      title: "hello"
+    });
     this.storage.get('smileys').then((val) => {
       this.smileys = val;
-      for (let smiley of this.smileys) {
+      console.log("heeey " + val);
+      for (let smiley of val) {
         console.log(smiley);
-        var marker = new google.maps.Marker({
+        let marker = new google.maps.Marker({
           position:  {lat: smiley.latitude, lng: smiley.longitude},
           map: this.map,
           title: smiley.feeling
