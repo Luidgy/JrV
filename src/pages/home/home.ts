@@ -13,6 +13,8 @@ import { Toast } from '@ionic-native/toast';
 export class HomePage {
   smileys: {feeling: string, latitude: number, longitude: number}[];
   feeling: string;
+  lat: number;
+  long: number;
 
   constructor(public navCtrl: NavController, private storage: Storage, private geolocation: Geolocation, private socialSharing: SocialSharing, private toast: Toast) {
     this.storage.get('smileys').then((val) => {
@@ -31,7 +33,12 @@ export class HomePage {
   }
 
   saveFeeling() {
-    this.geolocation.getCurrentPosition().then((resp) => {
+    var options = {
+      enableHighAccuracy: true,
+      maximumAge: 0
+    };
+
+    this.geolocation.getCurrentPosition(options).then((resp) => {
       let smiley = {
         feeling: this.feeling,
         latitude: resp.coords.latitude,
@@ -71,9 +78,9 @@ export class HomePage {
         feel = 'weird'
     }
     this.socialSharing.share("I'm feeling " + feel + ".", null, null, null).then(() => {
-      console.log('Sharing via Twitter success');
+      console.log('Sharing success');
     }).catch(() => {
-      console.log('Sharing via Twitter error');
+      console.log('Sharing error');
     });
   }
 }
