@@ -54,6 +54,7 @@ export class AboutPage {
     });
     this.storage.get('smileys').then((val) => {
       this.smileys = val;
+      console.log("heeey " + val);
       for (let smiley of val) {
         console.log(smiley);
         let marker = new google.maps.Marker({
