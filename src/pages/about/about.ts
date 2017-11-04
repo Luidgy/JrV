@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { GoogleMaps, GoogleMap, CameraPosition, LatLng, GoogleMapsEvent, Marker, MarkerOptions } from '@ionic-native/google-maps';
 
 declare var google;
 
@@ -12,23 +13,16 @@ declare var google;
 })
 export class AboutPage {
   @ViewChild('map') mapElement: ElementRef;
-  map: any;
-  start = 'chicago, il';
-  end = 'chicago, il';
-  directionsService = new google.maps.DirectionsService;
-  directionsDisplay = new google.maps.DirectionsRenderer;
-  scores: string[];
+  map: GoogleMap;
   latitude: number;
   longitude: number;
+  scores: string[];
 
-  constructor(public navCtrl: NavController, private storage: Storage, private socialSharing: SocialSharing, private geolocation: Geolocation) {
 
-    this.geolocation.getCurrentPosition().then((resp) => {
-      this.latitude = resp.coords.latitude;
-      this.longitude = resp.coords.longitude;
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+
+
+  constructor(public navCtrl: NavController, private storage: Storage, private socialSharing: SocialSharing, private _googleMaps: GoogleMaps, private _geoloc: Geolocation) {
+
     storage.set('scores', [121, 123213, 4344]);
 
     storage.get('scores').then((val) => {
@@ -43,30 +37,37 @@ export class AboutPage {
       console.log('Sharing via Facebook error');
     });
   }
-  ionViewDidLoad(){
+  ngAfterViewInit(){
+    let loc: LatLng;
     this.initMap();
-  }
-
-  initMap() {
-    this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 7,
-      center: {lat: 41.85, lng: -87.65}
+    this.getLocation().then(res => {
+    loc = new LatLng(res.coords.latitude, res.coords.longitude);
+    this.createMarker(loc, "Me").then((marker: Marker) => {
+      marker.showInfoWindow();
+    }).catch(err => {
+      console.log(err);
     });
+  }).catch(err => {
+    console.log(err);
+  });
 
-    this.directionsDisplay.setMap(this.map);
   }
 
-  calculateAndDisplayRoute() {
-    this.directionsService.route({
-      origin: this.start,
-      destination: this.end,
-      travelMode: 'DRIVING'
-    }, (response, status) => {
-      if (status === 'OK') {
-        this.directionsDisplay.setDirections(response);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
+  initMap(){
+    let element = this.mapElement.nativeElement;
+    this.map = this._googleMaps.create(element)
   }
+
+  getLocation(){
+    return this._geoloc.getCurrentPosition();
+  }
+
+  createMarker(loc: LatLng, title: string){
+    let markerOptions: MarkerOptions = {
+      position: loc,
+      title: title
+    };
+    return this.map.addMarker(markerOptions);
+  }
+
 }
